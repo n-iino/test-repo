@@ -11,15 +11,18 @@ jobs:
       - uses: khan/pull-request-comment-trigger@master
         id: check
         with:
-          trigger: "/test2"
+          trigger: "/hoge"
           reaction: rocket
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - name: setup
-        id: hoge
         if: steps.check.outputs.triggered == 'true'
         run: |
-          exit 1
+          exit 0
+      - name: setup
+        if: steps.check.outputs.triggered == 'true'
+        run: |
+          exit 0
       - name: test
         if: success()
         run: |
