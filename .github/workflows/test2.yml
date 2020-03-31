@@ -33,4 +33,9 @@ jobs:
         run: |
           echo failure
           exit 0
+      - name: test
+        if: failure()
+        run: |
+          echo failure2
+          exit 0
           
