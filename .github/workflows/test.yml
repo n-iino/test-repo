@@ -26,4 +26,4 @@ jobs:
         if: steps.check.outputs.triggered == 'true' || steps.check2.outputs.triggered == 'true'
         run: |
           echo "${{ github.event.issue.number }}"
-          echo "${{ toJson(github.event) }}"
+          echo "${{ toJson(github) }}"
