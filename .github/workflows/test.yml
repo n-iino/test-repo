@@ -30,6 +30,9 @@ jobs:
           echo "${{ toJson(github) }}"
           echo "${{ github.event.issue.pull_request.url }}"
           curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }}
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }} | jq ".head.ref"
-          #echo "##[set-output name=version;]$()"
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }} | jq -r ".head.ref"
+          echo "##[set-output name=ref;]$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }} | jq -r ".head.ref")"
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.hoge.outputs.ref }}
           
