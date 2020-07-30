@@ -6,8 +6,8 @@ jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
-      - name: release
-        if: github.event.inputs.release == 'true'
-        run: |
-          echo "hello"
-
+      - name: invoke cross browser regression
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: e2e
+          token: ${{ secrets.GH_PAT }}
