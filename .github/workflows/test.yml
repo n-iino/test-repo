@@ -1,15 +1,6 @@
 name: Manually triggered workflow
 on:
   workflow_dispatch:
-    inputs:
-      major:
-        description: "trueの時はメジャーバージョンアップする\r\nfalseだとコミットコメントから判断してminor or patchバージョンアップする"
-        required: true
-        default: "false"
-      release:
-        description: "trueの時はnpmにpublishする 基本はtrueで良い"
-        required: true
-        default: "true"
 
 jobs:
   say_hello:
