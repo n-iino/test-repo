@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       major:
-        description: "trueの時はメジャーバージョンアップする falseだとコミットコメントから判断してminor or patchバージョンアップする"
+        description: "trueの時はメジャーバージョンアップする<br>falseだとコミットコメントから判断してminor or patchバージョンアップする"
         required: true
         default: "false"
       release:
