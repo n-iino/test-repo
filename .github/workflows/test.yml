@@ -6,8 +6,13 @@ jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
+      - name: get pr number
+        id: calc
+        run: |
+          echo "##[set-output name=pr_number;]11"
       - name: invoke cross browser regression
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: e2e
           token: ${{ secrets.GH_PAT }}
+          inputs: '{ "prNumber": "${{ steps.calc.outputs.pr_number }}" }'
