@@ -2,18 +2,21 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Person to greet'
+      major:
+        description: "trueの時はメジャーバージョンアップする falseだとコミットコメントから判断してminor or patchバージョンアップする"
         required: true
         default: "false"
-      home:
-        description: 'location'
-        required: false
+      release:
+        description: "trueの時はnpmにpublishする 基本はtrueで良い"
+        required: true
+        default: "true"
 
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Hello ${{ github.event.inputs.name }}!"
-        echo "- in ${{ github.event.inputs.home }}!"
+      - name: release
+        if: github.event.inputs.release == "true"
+        run: |
+          echo "hello"
+
