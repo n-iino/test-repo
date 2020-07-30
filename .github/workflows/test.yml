@@ -1,38 +1,19 @@
-name: e2e
+name: Manually triggered workflow
 on:
-  pull_request:
-    types: [opened]
-  issue_comment:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: false
+      home:
+        description: 'location'
+        required: false
+
 jobs:
-  test:
+  say_hello:
     runs-on: ubuntu-latest
     steps:
-      - uses: khan/pull-request-comment-trigger@master
-        id: check
-        with:
-          trigger: "/test"
-          reaction: rocket
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - uses: khan/pull-request-comment-trigger@master
-        id: check2
-        with:
-          trigger: "/e2e"
-          reaction: rocket
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - name: setup
-        id: hoge
-        if: steps.check.outputs.triggered == 'true' || steps.check2.outputs.triggered == 'true'
-        run: |
-          echo "${{ github.event.issue.number }}"
-          echo "${{ toJson(github) }}"
-          echo "${{ github.event.issue.pull_request.url }}"
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }}
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }} | jq -r ".head.ref"
-          echo "##[set-output name=ref;]$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.issue.pull_request.url }} | jq -r ".head.ref")"
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ steps.hoge.outputs.ref }}
-          
+    - run: |
+        echo "Hello ${{ github.event.inputs.name }}!"
+        echo "- in ${{ github.event.inputs.home }}!"
