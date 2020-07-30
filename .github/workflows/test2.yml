@@ -1,41 +1,11 @@
 name: e2e
 on:
-  pull_request:
-    types: [opened]
-  issue_comment:
-    types: [created]
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: khan/pull-request-comment-trigger@master
-        id: check
-        with:
-          trigger: "/hoge"
-          reaction: rocket
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - name: setup
-        if: steps.check.outputs.triggered == 'true'
-        run: |
-          exit 1
-      - name: setup
-        if: steps.check.outputs.triggered == 'true'
-        run: |
-          exit 0
       - name: test
-        if: success()
         run: |
-          echo success
-          exit 0
-      - name: test
-        if: failure()
-        run: |
-          echo failure
-          exit 0
-      - name: test
-        if: failure()
-        run: |
-          echo failure2
-          exit 0
-          
+          pull_request_number=$(jq '.pull_request.number' <"${GITHUB_EVENT_PATH}")
+          echo ${pull_request_number}
