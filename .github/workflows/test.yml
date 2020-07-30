@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: release
-        if: github.event.inputs.release == true
+        if: github.event.inputs.release == 'true'
         run: |
           echo "hello"
 
