@@ -1,11 +1,14 @@
 name: e2e
 on:
   workflow_dispatch:
+    inputs:
+      prNumber:
+        description: "number of pullrequest"
+        required: true
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: test
         run: |
-          pull_request_number=$(jq '.pull_request.number' <"${GITHUB_EVENT_PATH}")
-          echo ${pull_request_number}
+          echo ${{ github.event.inputs.prNumber }}
