@@ -1,9 +1,9 @@
-name: Manually triggered workflow
+name: pr
 on:
   pull_request:
 
 jobs:
-  say_hello:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: invoke cross browser regression
