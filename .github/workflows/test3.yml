@@ -13,3 +13,4 @@ jobs:
           conclusion: neutral
           run-title: "run title"
           summary: "summary"
+          github-sha: "${{ steps.calc.outputs.pr_number }}"
