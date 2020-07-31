@@ -5,10 +5,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: get pr number
-        id: calc
-        run: |
-          echo "##[set-output name=pr_number;]$(jq '.pull_request.number' <"${GITHUB_EVENT_PATH}")"
       - uses: n-iino/check-status-action@main
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -17,4 +13,4 @@ jobs:
           conclusion: neutral
           run-title: "run title"
           summary: "summary"
-          head-sha: "${{ steps.calc.outputs.pr_number }}"
+          head-sha: ${{ github.event.pull_request.head.ref }}
