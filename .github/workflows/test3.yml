@@ -6,11 +6,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      uses: n-iino/check-status-action@main
-      with:
-        github-goken: ${{secrets.GITHUB_TOKEN}}
-        name: test
-        status: queued
-        conclusion: neutral
-        run-title: "run title"
-        summary: "summary"
+      - uses: n-iino/check-status-action@main
+        with:
+          github-goken: ${{secrets.GITHUB_TOKEN}}
+          name: test
+          status: queued
+          conclusion: neutral
+          run-title: "run title"
+          summary: "summary"
