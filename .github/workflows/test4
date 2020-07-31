@@ -1,0 +1,14 @@
+name: Manually triggered workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: invoke cross browser regression
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Manually triggered workflow
+          token: ${{ secrets.GH_PAT }}
+          inputs: '{ "sha": "${{ github.event.pull_request.head.ref }}" }'
