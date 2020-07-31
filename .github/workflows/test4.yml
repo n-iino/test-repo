@@ -9,6 +9,6 @@ jobs:
       - name: invoke cross browser regression
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: Manually triggered workflow
+          workflow: triggered
           token: ${{ secrets.GH_PAT }}
           inputs: '{ "sha": "${{ github.event.pull_request.head.ref }}" }'
