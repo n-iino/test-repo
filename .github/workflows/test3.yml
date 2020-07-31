@@ -1,4 +1,4 @@
-name: Manually triggered workflow
+name: triggered
 on:
   workflow_dispatch:
     inputs:
@@ -6,7 +6,7 @@ on:
         description: "sha of head"
         required: true
 jobs:
-  test:
+  test-triggered:
     runs-on: ubuntu-latest
     steps:
       - uses: n-iino/check-status-action@main
@@ -14,7 +14,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           name: test
           status: queued
-          conclusion: neutral
+          conclusion: success
           run-title: "run title"
           summary: "summary"
           head-sha: ${{ github.event.inputs.sha }}
