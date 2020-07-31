@@ -1,0 +1,16 @@
+name: Manually triggered workflow
+on:
+  issue_comment
+    types: [created]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      uses: n-iino/check-status-action@main
+      with:
+        github-goken: ${{secrets.GITHUB_TOKEN}}
+        name: test
+        status: queued
+        conclusion: neutral
+        run-title: "run title"
+        summary: "summary"
