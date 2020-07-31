@@ -12,3 +12,4 @@ jobs:
           workflow: triggered
           token: ${{ secrets.GH_PAT }}
           inputs: '{ "sha": "${{ github.event.pull_request.head.ref }}" }'
+          ref: ${{ github.event.pull_request.head.ref }}
